@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for obj in data%}
+    <a href="{% url 'create_product' %}">{{ obj }}</a>
+{% endfor %}
+{% endblock %}
