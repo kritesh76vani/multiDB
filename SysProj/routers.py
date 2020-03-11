@@ -3,7 +3,7 @@ class AuthRouter:
     A router to control all database operations on models in the
     auth and contenttypes applications.
     """
-    route_app_labels = {'auth', 'contenttypes'}
+    route_app_labels = {'auth', 'contenttypes','CustomUsers'}
 
     def db_for_read(self, model, **hints):
         """
@@ -26,6 +26,9 @@ class AuthRouter:
         Allow relations if a model in the auth or contenttypes apps is
         involved.
         """
+        db_list = ('default', 'database1', 'database2','database3','database4','database5')
+        if obj1._state.db in db_list and obj2._state.db in db_list:
+            return True
         if (
             obj1._meta.app_label in self.route_app_labels or
             obj2._meta.app_label in self.route_app_labels
@@ -41,13 +44,13 @@ class AuthRouter:
 
         if db == 'default':
             # Migrate Django core app models if current database is default
-            if app_label in ['auth','admin','sessions','contenttypes']:
+            if app_label in ['auth','admin','sessions','contenttypes','CustomUsers']:
                 return True            
             else:
                 # Non Django core app models should not be migrated if database is default
                 return False
         # Other database should not migrate Django core app models            
-        elif app_label in ['auth','admin','sessions','contenttypes']:
+        elif app_label in ['auth','admin','sessions','contenttypes','CustomUsers']:
             return False
         # Otherwise no opinion, defer to other routers or default database
         

@@ -2,6 +2,6 @@
 
 {% block content %}
 {% for obj in data%}
-    <a href="{% url 'create_product' %}">{{ obj }}</a>
+    <a href="{% url 'create_product' obj %}">{{ obj }}</a>
 {% endfor %}
 {% endblock %}

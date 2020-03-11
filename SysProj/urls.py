@@ -24,7 +24,8 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'^signup/$', reg_view.signup, name='signup'),
-    url(r'^db-list/$', product_view.ViewAllDB.as_view(), name='show_db'),
-    # url(r'^creat-product/$', product_view.CreateProduct.as_view(), name='create_product'),
-    url(r'^creat-product/\w+/$', product_view.CreateProduct.as_view(), name='create_product'),
+    url(r'^db-list/(?P<slug>[\w-]+)/$', product_view.ViewAllDB.as_view(), name='show_db'),
+    url(r'^creat/product/(?P<slug>[\w-]+)/$', product_view.CreateProduct.as_view(), name='create_product_save'),
+    url(r'^creat-product/(?P<slug>[\w-]+)/$', product_view.CreateProduct.as_view(), name='create_product'),
+    url(r'^all-product/$', product_view.AllProduct.as_view(), name='all_product'),
 ]
